@@ -1,0 +1,6 @@
+Name	Registry Name	Description	Label	Href	Alt	"Setting Name (use ""|"" delim)"	"Setting Value (use ""|"" delim)"	"Channels (use "","" w/ ""|"" delims)"	Hidden (boolean)	Icon File
+LXKAEFLifecyclePowerView	LXKAEFLifecyclePowerView	Advance Lifecycle View Portal				Registered Suite	Framework	LXKAEFLifecycleState | LXKAEFLifecycleTaskSignaturesApprovals		
+LXKPartBaselinePowerviewPortal	LXKPartBaselinePowerviewPortal					Registered Suite	EngineeringCentral	LXKPartBaselinePowerviewChannel	FALSE	
+LXKENCMyENGPartView	LXKENCMyENGPartView	My engineering Part view portal	My Engineering Part View					LXKENCMyENGViewPartChannel	FALSE	
+LXKENCMyENGEcView	LXKENCMyENGEcView	My engineering EC view portal	My Engineering EC View					LXKENCMyENGViewEcChannel	FALSE	
+LXKENCMyENGSpecView	LXKENCMyENGSpecView	My engineering Spec view portal	My Engineering Spec View					LXKENCMyENGViewSpecChannel	FALSE	
