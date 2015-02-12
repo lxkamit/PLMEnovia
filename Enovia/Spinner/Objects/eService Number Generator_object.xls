@@ -1,0 +1,6 @@
+Type	Name	Rev			Policy	State	Vault	Owner	description	eService Next Number
+eService Number Generator	type_Document	Single-BOM MEP Report			eService Object Generator	Exists	eService Administration	creator	Number Generator for Single-BOM Report Ref Doc type	01
+eService Number Generator	type_Off-Spec	Lexmark			eService Object Generator	Exists	eService Administration	creator	Number Generator for Off-Spec type	1
+eService Number Generator	type_MERT	Lexmark			eService Object Generator	Exists	eService Administration	creator	Number Generator for MERT type	1
+
+

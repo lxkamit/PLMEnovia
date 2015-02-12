@@ -1,0 +1,85 @@
+#######################################################################
+################# DBA Tasks ###########################################
+#######################################################################
+
+######################################################################
+################# Before Spinner Tasks #################################
+#######################################################################
+
+Requirement #18386
+From MQL execute script Rq-18386_Rename_LexmarkGroup.tcl
+- set context to creator
+- cd to mql/12.8 Scripts/RQ_18386
+- enter: run Rq-18386_Rename_LexmarkGroup.tcl;
+
+Check log/error file for success or failure.
+=====================================================================
+RQ 18068:
+- set context to creator
+- set workspace user "Global User"
+- add filter "Impact Analysis"
+
+
+#######################################################################
+################# After Spinner Tasks #################################
+#######################################################################
+RQ 18429: Updating meaning for relationship "Sellable Product Model":
+=====================================================================
+MQL> modify relationship "Sellable Product Model" from meaning "Has Settings Defined By" to meaning "Defines Settings For";
+
+RQ 18127: TVC Report Removal
+=====================================================================
+Remove the following from the STAGING directory before deployeed static content:
+- WEB-INF/tvc/enc/report
+- WEB-INF/tvx (remove entire directory, which contains a couple subdirectories and 2 report files)
+
+=====================================================================
+ReqID 18236
+----------------------------
+from MQL -> temp query bus "Part"  * * select id last.id current next.current dump , output /tmp/PartList.csv;
+
+from MQL -> exec prog LXKExtractEBOM -method extractBOMInfoForCost;
+BOM extract file BOMInfoForCost.csv will get generated in directory /tmp
+Check log BOMInfoCost-Log.log in directory /tmp for errors.
+=====================================================================
+
+RQ 18411:
+----------------------------------------------------------------------
+- set context to creator
+- cd to mql/12.8 Scripts/RQ_18411
+- enter: run 18411.tcl;
+
+=====================================================================
+ReqID 18419
+migration script to set Category-of-Change value on all existing ECs
+----------------------------
+from MQL -> exec prog LXKEDISMigration -method categoryofChangMigration;
+Log/Error file will get generated in directory /tmp
+
+=====================================================================
+RQ 18422:
+----------------------------------------------------------------------
+- set context to creator
+- MQL>exec prog LXKEDISMigration -method scriptToUpdateIAAttributes;
+Log/Error file will get generated in directory /tmp
+=====================================================================
+ReqID 18420
+migration script to set Category-of-Change value on all existing ECs
+----------------------------
+- set context to creator
+- MQL>trigger off;
+- MQL>exec prog LXKEDISMigration -method dispositionCodesMigration;
+Log/Error file will get generated in directory /tmp
+
+
+=====================================================================
+
+###This script will be run after the IA script to connect new relationships.(18411,18419,18420)###
+RQ 18421:
+----------------------------------------------------------------------
+- set context to creator
+- cd to mql/12.8 Scripts/RQ_18421
+- enter: run 18421.tcl;
+
+=====================================================================
+

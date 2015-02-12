@@ -1,0 +1,10 @@
+<OfficeIntegration enabled="true" useBuiltInTriggers="true"> 
+    <CDM enabled="true"/> 
+    <FCS enabled="true"/> 
+    <ManagedTypes> 
+        <Type name="type_DOCUMENTS"/> 
+    </ManagedTypes> 
+    <NonManagedTypes> 
+    </NonManagedTypes>
+    <Client fileRenameEnabled="warn"/>
+</OfficeIntegration>

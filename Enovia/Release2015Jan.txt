@@ -1,0 +1,130 @@
+#######################################################################
+################# DBA Tasks ###########################################
+#######################################################################
+
+######################################################################
+################# Before Spinner Tasks #################################
+#######################################################################
+RQ 18187:
+- set context to creator
+- cd to mql/12.7 Scripts/RQ_18187
+- enter: run RQ_18187.tcl;
+
+
+#######################################################################
+################# Before Spinner Tasks ################################
+#######################################################################
+RQ 18030:
+- set context to creator
+- cd to mql/12.7 Scripts/RQ_18030
+- enter: run 18030.tcl;
+
+#######################################################################
+################# Spinner Tasks ################################
+#######################################################################
+
+
+#######################################################################
+################# After Spinner Tasks #################################
+#######################################################################
+RQ 18128:
+==========
+Step 1: 
+---------
+Create_SAP_Buyback_File_Document.tcl: this will create document object("Document" "SAP Buy Back" 0)
+- set context to creator
+- cd to mql/12.7 Scripts/RQ_18128
+- enter: run Create_SAP_Buyback_File_Document.tcl;
+
+Step 2: Web service deployment steps for SAPBuyBackDataService
+-------------------------------------------------------------------------------------------
+1. Deploy the following jar file from the following dir in CVS
+    \M1Schema\ematrix\WEB-INF\lib\SAPBuyBackDataService.jar
+
+2. Copy the following wsdl files to webservices folder under Tomcat folder wherever the application is deployed (Ex: C:\Tomcat 4.1\webapps\ematrix\webservices)
+    \M1Schema\mql\webservices\QA\SAPBuyBackDataService.wsdl
+
+3. Copy the config WSDD file to WEB-INF(where the web.xml file exists) folder under tomcat
+    M1Schema\ematrix\WEB-INF\server-config.wsdd
+    
+4. Compile JPO SAPBuyBackDataService after Application server is restarted.
+   compile program SAPBuyBackDataService force update;
+   
+RQ 18287 (Once per Env)
+-------------------------------
+Set up a daily cron job to run 1 minute past midnight to execute the MQL command:-
+exec prog LXKProduct -method expirePCDCronJob;
+
+
+#######################################################################
+################# After Spinner Tasks #################################
+#######################################################################
+RQ 18312
+Web service deployment steps for FileTransferDataService in QA
+-------------------------------------------------------------------------------------------
+1. Deploy the following jar file from the following dir in CVS
+    \Enovia\ematrix\WEB-INF\lib\FileTransferDataService.jar
+
+2. Copy the following wsdl files to webservices folder under Tomcat folder wherever the application is deployed (Ex: C:\Tomcat 4.1\webapps\ematrix\webservices)
+    \Enovia\mql\webservices\QA\FileTransferDataService.wsdl
+
+3. Copy the config WSDD file to WEB-INF(where the web.xml file exists) folder under tomcat
+    \Enovia\ematrix\WEB-INF\server-config.wsdd
+    
+4. Compile JPO FileTransferDataService after Application server is restarted.
+   compile program FileTransferDataService update;
+   
+   Web service deployment steps for FileTransferDataService in Production
+-------------------------------------------------------------------------------------------
+1. Deploy the following jar file from the following dir in CVS
+    \Enovia\ematrix\WEB-INF\lib\FileTransferDataService.jar
+
+2. Copy the following wsdl files to webservices folder under Tomcat folder wherever the application is deployed (Ex: C:\Tomcat 4.1\webapps\ematrix\webservices)
+    \Enovia\mql\webservices\Prod\FileTransferDataService.wsdl
+
+3. Copy the config WSDD file to WEB-INF(where the web.xml file exists) folder under tomcat
+    \Enovia\ematrix\WEB-INF\server-config.wsdd
+    
+4. Compile JPO FileTransferDataService after Application server is restarted.
+   compile program FileTransferDataService update;
+   
+    Web service deployment steps for FileTransferDataService in Integration
+-------------------------------------------------------------------------------------------
+1. Deploy the following jar file from the following dir in CVS
+    \Enovia\ematrix\WEB-INF\lib\FileTransferDataService.jar
+
+2. Copy the following wsdl files to webservices folder under Tomcat folder wherever the application is deployed (Ex: C:\Tomcat 4.1\webapps\ematrix\webservices)
+    \Enovia\mql\webservices\Integration\FileTransferDataService.wsdl
+
+3. Copy the config WSDD file to WEB-INF(where the web.xml file exists) folder under tomcat
+    \Enovia\ematrix\WEB-INF\server-config.wsdd
+    
+4. Compile JPO FileTransferDataService after Application server is restarted.
+   compile program FileTransferDataService update;
+   
+     Web service deployment steps for FileTransferDataService in Development
+-------------------------------------------------------------------------------------------
+1. Deploy the following jar file from the following dir in CVS
+    \Enovia\ematrix\WEB-INF\lib\FileTransferDataService.jar
+
+2. Copy the following wsdl files to webservices folder under Tomcat folder wherever the application is deployed (Ex: C:\Tomcat 4.1\webapps\ematrix\webservices)
+    \Enovia\mql\webservices\Dev\FileTransferDataService.wsdl
+
+3. Copy the config WSDD file to WEB-INF(where the web.xml file exists) folder under tomcat
+    \Enovia\ematrix\WEB-INF\server-config.wsdd
+    
+4. Compile JPO FileTransferDataService after Application server is restarted.
+   compile program FileTransferDataService update;
+   #######################################################################
+################# Before Spinner Tasks #################################
+#######################################################################
+Defect # 7588 (Once per Env)
+-----------------------------
+MQL>add bus "eService Number Generator" type_ProductComplianceDocument "" policy "eService Object Generator" vault "eService 
+Administration" "eService Next Number" 0000001;
+
+######################################################################
+################# Before Spinner Tasks #################################
+#######################################################################
+Defect #7782
+MQL>modify type "MRO PART" name "MRO Part";

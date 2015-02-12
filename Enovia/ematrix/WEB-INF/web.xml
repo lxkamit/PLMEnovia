@@ -1,0 +1,1242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app id="WebApp_1">
+   <servlet>
+      <servlet-name>tvcaction</servlet-name>
+      <servlet-class>com.technia.tvc.core.TVCServlet</servlet-class>
+      <init-param>
+         <param-name>tvc.core.productionMode</param-name>
+         <param-value>TRUE</param-value>
+      </init-param>
+      <init-param>
+         <param-name>tvc.core.logLevel</param-name>
+         <param-value>FATAL</param-value>
+      </init-param>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>tvcaction</servlet-name>
+      <url-pattern>/tvc-action/*</url-pattern>
+   </servlet-mapping>
+   <!-- SOAP Compression Filter  for 3DLive web services -->
+   <filter>
+      <filter-name>SOAPCompressionFilter</filter-name>
+      <filter-class>com.matrixone.apps.plmprovider.gzipFilter.GZIP2WayFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>SOAPCompressionFilter</filter-name>
+      <url-pattern>/services/JpoPlmproviderConnect</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>SOAPCompressionFilter</filter-name>
+      <url-pattern>/services/JpoPlmproviderMetaData</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>SOAPCompressionFilter</filter-name>
+      <url-pattern>/services/JpoPlmproviderQuery</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>SOAPCompressionFilter</filter-name>
+      <url-pattern>/services/JpoPlmproviderFile</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>SOAPCompressionFilter</filter-name>
+      <url-pattern>/services/JpoPlmproviderNavRep</url-pattern>
+   </filter-mapping>
+   <!-- System Error Handling -->
+   <error-page>
+      <error-code>500</error-code>
+      <location>/common/emxNavigatorErrorPage.jsp?errorCode=500</location>
+   </error-page>
+   <error-page>
+      <error-code>404</error-code>
+      <location>/common/emxNavigatorErrorPage.jsp?errorCode=404</location>
+   </error-page>
+   <error-page>
+      <exception-type>java.lang.Throwable</exception-type>
+      <location>/common/emxNavigatorErrorPage.jsp</location>
+   </error-page>
+   <display-name>enovia</display-name>
+   <context-param id="ContextParam_1">
+      <param-name>properties</param-name>
+      <param-value>/viper_storage/Matrix/PRODT3/V6/Software/managed/properties/framework.properties</param-value>
+   </context-param>
+   <context-param id="ContextParam_2">
+      <param-name>ematrix.server.host</param-name>
+      <param-value/>
+   </context-param>
+   <context-param id="ContextParam_3">
+      <param-name>ematrix.login.page</param-name>
+      <param-value>/emxLogin.jsp</param-value>
+   </context-param>
+   <context-param id="ContextParam_4">
+      <param-name>ematrix.login.failure.page</param-name>
+      <param-value>/emxLogin.jsp</param-value>
+   </context-param>
+   <context-param id="ContextParam_5">
+      <param-name>ematrix.web.app</param-name>
+      <param-value>true</param-value>
+   </context-param>
+   <context-param id="ContextParam_6">
+      <param-name>emxLogin.FormAction</param-name>
+      <param-value>/ematrix/servlet/login</param-value>
+   </context-param>
+   <context-param id="ContextParam_7">
+      <param-name>emxLogin.FrameworkTarget</param-name>
+      <param-value>common/emxNavigator.jsp</param-value>
+   </context-param>
+   <context-param id="ContextParam_8">
+      <param-name>ematrix.page.path</param-name>
+      <param-value>/ematrix</param-value>
+   </context-param>
+   <context-param id="ContextParam_9">
+      <param-name>ematrix.home.page</param-name>
+      <param-value>/common/emxNavigator.jsp</param-value>
+   </context-param>
+   <context-param id="ContextParam_10">
+      <param-name>ematrix.load.program</param-name>
+      <param-value>eServiceListSchemaNames.tcl</param-value>
+   </context-param>
+   <context-param id="ContextParam_11">
+      <param-name>ematrix.encoding</param-name>
+      <param-value>UTF8</param-value>
+   </context-param>
+   <context-param id="ContextParam_12">
+      <param-name>ematrix.audit.log</param-name>
+      <param-value>true</param-value>
+   </context-param>
+   <!-- legacy servlet properties
+      <context-param id="ContextParam_13">
+         <param-name>ematrix.servlet.ui</param-name>
+         <param-value>true</param-value>
+      </context-param>
+      <context-param id="ContextParam_14">
+         <param-name>ematrix.timer.agent</param-name>
+         <param-value></param-value>
+      </context-param>
+      <context-param id="ContextParam_15">
+         <param-name>ematrix.timer.agent.key</param-name>
+         <param-value></param-value>
+      </context-param>
+      <context-param id="ContextParam_16">
+         <param-name>ematrix.timer.interval</param-name>
+         <param-value>21600</param-value>
+      </context-param>
+      <context-param id="ContextParam_17">
+         <param-name>ematrix.timer.command</param-name>
+         <param-value>execute program emxWorkspaceTimerJPO -method performTaskEscalation</param-value>
+      </context-param>
+-->
+   <!-- static content filter -->
+   <!-- Start Apparel Accelerator Filters Definition -->
+   <filter>
+      <filter-name>CustomFilterFAO</filter-name>
+      <filter-class>com.matrixone.servlet.CustomFilter</filter-class>
+      <init-param>
+         <param-name>ematrix.customDirName</param-name>
+         <param-value/>
+      </init-param>
+      <init-param>
+         <param-name>ematrix.customFilePrefix</param-name>
+         <param-value>FAO_</param-value>
+      </init-param>
+   </filter>
+  
+   <!--  AE Extended Custom filter class  -->
+        <filter>
+         <filter-name>CustomFilters</filter-name>
+         <filter-class>com.matrixone.servlet.CustomFilters</filter-class>
+         <init-param>
+           <param-name>ematrix.directory1.name</param-name>
+           <param-value>engineeringcentral</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory1.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory1.prefix2</param-name>
+           <param-value>cam_</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory1.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory2.name</param-name>
+           <param-value>programcentral</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory2.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory2.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory3.name</param-name>
+           <param-value>common</param-value>
+         </init-param>
+         <!--begin added by ritesh for lib sol for webform -->
+		 <init-param>
+           <param-name>ematrix.directory3.prefix1</param-name>
+           <param-value>emxLib</param-value>
+         </init-param>
+		 <!--end added by ritesh for lib sol for webform -->
+         <init-param>
+		 <!-- changed the prefix1 to prefix2 here -->
+           <param-name>ematrix.directory3.prefix2</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory3.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory4.name</param-name>
+           <param-value>components</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory4.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory4.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory5.name</param-name>
+           <param-value>businessmetrics</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory5.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory5.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory6.name</param-name>
+           <param-value>costanalytics</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory6.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory6.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory7.name</param-name>
+           <param-value>documentcentral</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory7.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory7.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory8.name</param-name>
+           <param-value>classification</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory8.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory8.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory9.name</param-name>
+           <param-value>batchprintpdf</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory9.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory9.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory10.name</param-name>
+           <param-value>productline</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory10.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory10.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory11.name</param-name>
+           <param-value>iefdesigncenter</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory11.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory11.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory12.name</param-name>
+           <param-value>teamcentral</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory12.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory12.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory13.name</param-name>
+           <param-value>configuration</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory13.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory13.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+          <init-param>
+           <param-name>ematrix.directory14.name</param-name>
+           <param-value>requirements</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory14.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory14.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+        <init-param>
+           <param-name>ematrix.directory15.name</param-name>
+           <param-value>productcentral</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory15.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory15.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+		 <init-param>
+           <param-name>ematrix.directory16.name</param-name>
+           <param-value>tvc/structurebrowser/structuresearch</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory16.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+		 <init-param>
+           <param-name>ematrix.directory16.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+		 <init-param>
+           <param-name>ematrix.directory17.name</param-name>
+           <param-value>tvc/reportgenerator</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory17.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+		 <init-param>
+           <param-name>ematrix.directory17.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+		 <init-param>
+           <param-name>ematrix.directory18.name</param-name>
+           <param-value>tvc/reportgenerator/images</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory18.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+		 <init-param>
+           <param-name>ematrix.directory18.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>
+		 <init-param>
+           <param-name>ematrix.directory19.name</param-name>
+           <param-value>materialscompliance</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory19.prefix1</param-name>
+           <param-value>LXK</param-value>
+         </init-param>
+         <init-param>
+           <param-name>ematrix.directory19.customDirName</param-name>
+           <param-value>custom</param-value>
+         </init-param>        
+       </filter>
+	   <!-- AE CustomFilters mappings -->
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/engineeringcentral/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/programcentral/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/common/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/components/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/businessmetrics/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/costanalytics/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/documentcentral/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/classification/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/batchprintpdf/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>      
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/productcentral/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/productline/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/iefdesigncenter/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/teamcentral/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/configuration/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+     <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/requirements/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <!-- Added by PS for Sogeti for 2012x Upgrade Req 18055 -->
+	 <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/materialscompliance/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+	 <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/tvc/structurebrowser/structuresearch/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/tvc/reportgenerator/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilters</filter-name>
+        <url-pattern>/tvc/reportgenerator/images/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+      </filter-mapping>
+   <!-- End Apparel Accelerator Filters Definition -->
+   <!-- Start definition for Adobe SSO Login ENOVIA Collaboration for Adobe Illustrator Server -->
+   <!-- 
+	<filter>
+		<filter-name>NtlmHttpFilter</filter-name>
+		<filter-class>jcifs.http.NtlmHttpFilter</filter-class>
+		<init-param>
+			<param-name>jcifs.netbios.wins</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>jcifs.smb.client.domain</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>jcifs.http.domainController</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>jcifs.util.loglevel</param-name>
+			<param-value>2</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>NtlmHttpFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+-->
+   <!-- End definition for Adobe SSO Login ENOVIA Collaboration for Adobe Illustrator Server -->
+   <!-- Start LSG Filters mapping -->
+   <!-- 
+	  <filter>
+		<filter-name>CustomLSGFilter</filter-name>
+		<filter-class>com.matrixone.servlet.CustomFilter</filter-class>
+		<init-param>
+			<param-name>ematrix.customFilePrefix</param-name>
+			<param-value>iw_</param-value>
+		</init-param>
+	  </filter>
+	  
+	  <filter-mapping>
+		<filter-name>CustomLSGFilter</filter-name>
+		<url-pattern>/programcentral/*</url-pattern>
+		</filter-mapping>
+
+	  <filter-mapping>
+		<filter-name>CustomLSGFilter</filter-name>
+		<url-pattern>/components/*</url-pattern>
+	  </filter-mapping>
+-->
+   <!-- END LSG Filters mapping -->
+   <!--  Custom filter 
+      <filter>
+        <filter-name>CustomFilter</filter-name>
+        <filter-class>com.matrixone.servlet.CustomFilter</filter-class>
+        <init-param> 
+            <param-name>ematrix.customFilePrefix</param-name>   
+            <param-value></param-value>
+        </init-param>
+      </filter>
+-->
+   <!--  TomCat UTF-8 setting 
+      <filter>
+        <filter-name>Set Character Encoding</filter-name>
+        <filter-class>com.matrixone.servlet.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+          <param-name>encoding</param-name>
+          <param-value>UTF-8</param-value>
+        </init-param>
+      </filter>
+-->
+   <!-- Start CPN Custom Filters Definition -->
+   <filter>
+      <filter-name>CustomFilterCPN</filter-name>
+      <filter-class>com.matrixone.servlet.CustomFilter</filter-class>
+      <init-param>
+         <param-name>ematrix.customDirName</param-name>
+         <param-value/>
+      </init-param>
+      <init-param>
+         <param-name>ematrix.customFilePrefix</param-name>
+         <param-value>CPN_</param-value>
+      </init-param>
+   </filter>
+   <!-- End CPN Custom Filters Definition -->
+   <!-- Start CPS Custom Filters Definition -->
+   <filter>
+      <filter-name>CustomFilterCPS</filter-name>
+      <filter-class>com.matrixone.servlet.CustomFilter</filter-class>
+      <init-param>
+         <param-name>ematrix.customDirName</param-name>
+         <param-value/>
+      </init-param>
+      <init-param>
+         <param-name>ematrix.customFilePrefix</param-name>
+         <param-value>GSM_</param-value>
+      </init-param>
+   </filter>
+   <!-- End CPS Custom Filters Definition -->
+   <!-- Added CPG Custom Filters Definition -->
+   <filter>
+      <filter-name>CustomFilterCPG</filter-name>
+      <filter-class>com.matrixone.servlet.CustomFilter</filter-class>
+      <init-param>
+         <param-name>ematrix.customDirName</param-name>
+         <param-value/>
+      </init-param>
+      <init-param>
+         <param-name>ematrix.customFilePrefix</param-name>
+         <param-value>CPG_</param-value>
+      </init-param>
+   </filter>
+   <!-- End CPG Custom Filters Definition -->
+   <!-- TomCat UTF-8 filter mapping 
+      <filter-mapping>
+        <filter-name>Set Character Encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+      </filter-mapping>
+-->
+   <!-- Start Apparel Accelerator Filters mapping -->
+   <filter-mapping>
+      <filter-name>CustomFilterFAO</filter-name>
+      <url-pattern>/common/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterFAO</filter-name>
+      <url-pattern>/components/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterFAO</filter-name>
+      <url-pattern>/productline/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterFAO</filter-name>
+      <url-pattern>/programcentral/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterFAO</filter-name>
+      <url-pattern>/suppliercentral/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterFAO</filter-name>
+      <url-pattern>/sourcing/*</url-pattern>
+   </filter-mapping>
+   <!-- End Apparel Accelerator Filters mapping  -->
+   <!-- Custom filter mappings 
+      <filter-mapping>
+        <filter-name>CustomFilter</filter-name>
+        <url-pattern>/engineeringcentral/*</url-pattern>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilter</filter-name>
+        <url-pattern>/teamcentral/*</url-pattern>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilter</filter-name>
+        <url-pattern>/suppliercentral/*</url-pattern>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilter</filter-name>
+        <url-pattern>/programcentral/*</url-pattern>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilter</filter-name>
+        <url-pattern>/sourcingcentral/*</url-pattern>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilter</filter-name>
+        <url-pattern>/components/*</url-pattern>
+      </filter-mapping>
+      <filter-mapping>
+        <filter-name>CustomFilter</filter-name>
+        <url-pattern>/common/*</url-pattern>
+      </filter-mapping>
+-->
+   <!-- static content filter mappings -->
+   <!-- Start CPN Custom Filter Mappings -->
+   <filter-mapping>
+      <filter-name>CustomFilterCPN</filter-name>
+      <url-pattern>/common/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPN</filter-name>
+      <url-pattern>/components/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPN</filter-name>
+      <url-pattern>/productline/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPN</filter-name>
+      <url-pattern>/programcentral/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPN</filter-name>
+      <url-pattern>/suppliercentral/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPN</filter-name>
+      <url-pattern>/sourcing/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPN</filter-name>
+      <url-pattern>/acceleratortools/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPN</filter-name>
+      <url-pattern>/engineeringcentral/*</url-pattern>
+   </filter-mapping>
+   <!-- End CPN CPN Custom Filter Mappings -->
+   <!-- Start CPS Custom Filter Mappings -->
+   <filter-mapping>
+      <filter-name>CustomFilterCPS</filter-name>
+      <url-pattern>/common/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPS</filter-name>
+      <url-pattern>/components/*</url-pattern>
+   </filter-mapping>
+   <!-- End CPS Custom Filter Mappings -->
+   <!-- Start CPG Filters mapping -->
+   <filter-mapping>
+      <filter-name>CustomFilterCPG</filter-name>
+      <url-pattern>/common/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPG</filter-name>
+      <url-pattern>/components/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPG</filter-name>
+      <url-pattern>/productline/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPG</filter-name>
+      <url-pattern>/programcentral/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPG</filter-name>
+      <url-pattern>/suppliercentral/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPG</filter-name>
+      <url-pattern>/sourcing/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPG</filter-name>
+      <url-pattern>/acceleratortools/*</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>CustomFilterCPG</filter-name>
+      <url-pattern>/engineeringcentral/*</url-pattern>
+   </filter-mapping>
+   <listener>
+      <listener-class>com.matrixone.servlet.MxServletListener</listener-class>
+   </listener>
+   <!-- End CPG Filters -->
+   <!-- Start : Listener for HNP accelerator to invoke the NPDMEPObsoleteCreateProcess batch process ::: Please uncomment the below entry after installing HNPAccelerator>
+	<listener>
+		<listener-class>com.matrixone.apps.npd.NPDMEPObsoleteCreateProcess</listener-class>
+	</listener>
+< End : Listener for HNP accelerator to invoke the NPDMEPObsoleteCreateProcess batch process  -->
+   <!-- Define CGI servlet for WebLogic -->
+   <!-- Define our servlets -->
+   <servlet id="Servlet_1">
+      <servlet-name>Framework</servlet-name>
+      <servlet-class>com.matrixone.servlet.Framework</servlet-class>
+      <load-on-startup>1</load-on-startup>
+   </servlet>
+   <servlet id="Servlet_2">
+      <servlet-name>LogoutServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.LogoutServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_3">
+      <servlet-name>ProgramServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.ProgramServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_4">
+      <servlet-name>MatrixXMLServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.MatrixXMLServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_5">
+      <servlet-name>ResourceServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.ResourceServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_6">
+      <servlet-name>BusinessObjectServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.BusinessObjectServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_7">
+      <servlet-name>MatrixExchangeServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.MatrixExchangeServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_8">
+      <servlet-name>BusinessTypeServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.BusinessTypeServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_9">
+      <servlet-name>FileUploadServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.FileUploadServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_10">
+      <servlet-name>FileCheckinServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.FileCheckinServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_11">
+      <servlet-name>LoginServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.LoginServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_12">
+      <servlet-name>FileCheckoutServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.FileCheckoutServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_13">
+      <servlet-name>WizardServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.WizardServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_14">
+      <servlet-name>FrameworkServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.FrameworkServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_15">
+      <servlet-name>MatrixAppletServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.MatrixAppletServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_16">
+      <servlet-name>WorkspaceServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.WorkspaceServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_17">
+      <servlet-name>fcs</servlet-name>
+      <servlet-class>com.matrixone.fcs.fcs.FcsServlet</servlet-class>
+   </servlet>
+   <servlet id="Servlet_18">
+      <servlet-name>audit</servlet-name>
+      <servlet-class>com.matrixone.servlet.AuditServlet</servlet-class>
+      <load-on-startup>2</load-on-startup>
+   </servlet>
+   <!-- Start servlet definition for IC -->
+   <!-- End servlet definition for IC -->
+   <!-- Start MSOfficeIntegration servlet definition for MxMSOfficeServer -->
+   <servlet id="MSOfficeServlet_1">
+      <servlet-name>MSOICommandsServlet</servlet-name>
+      <servlet-class>com.matrixone.MSOfficeIntegration.server.servlet.IEFCommandsServlet</servlet-class>
+   </servlet>
+   <!-- End MSOfficeIntegration servlet definition for MxMSOfficeServer -->
+   <!-- Start AdobeIllustratorIntegration servlet definition for ENOVIA Collaboration for Adobe Illustrator Server -->
+   <!-- End AdobeIllustratorIntegration servlet definition for ENOVIA Collaboration for Adobe Illustrator Server -->
+   <!-- Start servlet definition for MCAD -->
+   <servlet id="MCADServlet_1">
+      <servlet-name>IEFCommandsServlet</servlet-name>
+      <servlet-class>com.matrixone.MCADIntegration.server.servlet.IEFCommandsServlet</servlet-class>
+   </servlet>
+   <servlet id="MCADServlet_2">
+      <servlet-name>MCADBrowserServlet</servlet-name>
+      <servlet-class>com.matrixone.MCADIntegration.server.servlet.MCADBrowserServlet</servlet-class>
+   </servlet>
+   <servlet id="MCADServlet_3">
+      <servlet-name>IEFRapidFileAccessServlet</servlet-name>
+      <servlet-class>com.matrixone.MCADIntegration.server.servlet.IEFRapidFileAccessServlet</servlet-class>
+      <!--        <load-on-startup></load-on-startup> -->
+   </servlet>
+   <!-- End servlet definition for MCAD -->
+   <!-- Start servlet definition for VPLM -->
+   <!-- End servlet definition for VPLM -->
+   <!-- Start servlet definition for .NET -->
+   <servlet id="NETServlet_1">
+      <servlet-name>BinaryDownload</servlet-name>
+      <display-name>BinaryDownload</display-name>
+      <description>Servlet to download .NET binary</description>
+      <servlet-class>com.matrixone.apps.requirements.richtext.NET.BinaryDownload</servlet-class>
+   </servlet>
+   <!-- End servlet definition for .NET -->
+   <!-- Timer Servlet - see mapping below
+      <servlet id="Servlet_19">
+         <servlet-name>TimerServlet</servlet-name>
+         <servlet-class>com.matrixone.servlet.TimerServlet</servlet-class>
+         <load-on-startup>2</load-on-startup>
+      </servlet>
+-->
+   <servlet id="Servlet_20">
+      <servlet-name>OpenViewFcsServlet</servlet-name>
+      <servlet-class>com.matrixone.servlet.OpenViewFcsServlet</servlet-class>
+   </servlet>
+   <!-- AefStartupServlet - see mapping below
+      <servlet id="Servlet_AEF">
+         <servlet-name>AefStartupServlet</servlet-name>
+         <servlet-class>com.matrixone.apps.framework.ui.AefStartupServlet</servlet-class>
+         <load-on-startup>3</load-on-startup>
+      </servlet>
+ -->
+   <!-- APP -->
+   <!--
+    <servlet>
+     <servlet-name>ZymDispatchServlet</servlet-name>
+     <servlet-class>com.zymmetry.mx.core.servlet.DispatchServlet</servlet-class>
+     <init-param>
+            <param-name>urlPattern</param-name>
+            <param-value>.*\((.*)\,(.*)\)\.zym</param-value>
+     </init-param>
+     <init-param>
+            <param-name>moduleCode</param-name>
+            <param-value>1</param-value>
+     </init-param>
+     <init-param>
+            <param-name>operation</param-name>
+            <param-value>2</param-value>
+     </init-param>
+    </servlet>
+    <servlet>
+     <servlet-name>ZymStartupServlet</servlet-name>
+     <servlet-class>com.zymmetry.mx.core.servlet.StartupServlet</servlet-class>
+     <load-on-startup>100</load-on-startup>
+    </servlet>
+	<servlet id="VPLMIndexServlet_1">
+		<servlet-name>IndexServlet</servlet-name>
+		<servlet-class>com.matrixone.vplm.sidlservlet.IndexServlet</servlet-class>
+	</servlet>
+	<servlet-mapping id="VPLMIndexServletMapping_1">
+		<servlet-name>IndexServlet</servlet-name>
+		<url-pattern>/index/IndexServlet/*</url-pattern>
+	</servlet-mapping>
+-->
+   <!-- APP -->
+   <!-- ***Web Services*** -->
+   <servlet>
+      <servlet-name>AxisServlet</servlet-name>
+      <display-name>Apache-Axis Servlet</display-name>
+      <servlet-class>
+            org.apache.axis.transport.http.AxisServlet
+         </servlet-class>
+   </servlet>
+   <servlet>
+      <servlet-name>AxisAdminServlet</servlet-name>
+      <display-name>Axis Admin Servlet</display-name>
+      <servlet-class>
+             org.apache.axis.transport.http.AdminServlet
+         </servlet-class>
+      <load-on-startup>100</load-on-startup>
+   </servlet>
+   <servlet>
+      <servlet-name>SOAPMonitorService</servlet-name>
+      <display-name>SOAPMonitorService</display-name>
+      <servlet-class>
+             org.apache.axis.monitor.SOAPMonitorService
+         </servlet-class>
+      <init-param>
+         <param-name>SOAPMonitorPort</param-name>
+         <param-value>5001</param-value>
+      </init-param>
+      <load-on-startup>100</load-on-startup>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>AxisServlet</servlet-name>
+      <url-pattern>/servlet/AxisServlet</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+      <servlet-name>AxisServlet</servlet-name>
+      <url-pattern>*.jws</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+      <servlet-name>AxisServlet</servlet-name>
+      <url-pattern>/services/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+      <servlet-name>SOAPMonitorService</servlet-name>
+      <url-pattern>/SOAPMonitor</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+      <servlet-name>AxisAdminServlet</servlet-name>
+      <url-pattern>/servlet/AdminServlet</url-pattern>
+   </servlet-mapping>
+   <!-- ***Web Services*** -->
+   <!-- CGI servlet mapping for WebLogic -->
+   <servlet-mapping id="ServletMapping_1">
+      <servlet-name>LoginServlet</servlet-name>
+      <url-pattern>/servlet/login/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_2">
+      <servlet-name>LogoutServlet</servlet-name>
+      <url-pattern>/servlet/logout/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_3">
+      <servlet-name>FileCheckinServlet</servlet-name>
+      <url-pattern>/servlet/checkin/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_4">
+      <servlet-name>ProgramServlet</servlet-name>
+      <url-pattern>/servlet/program/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_5">
+      <servlet-name>MatrixXMLServlet</servlet-name>
+      <url-pattern>/servlet/MatrixXMLServlet/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_6">
+      <servlet-name>ResourceServlet</servlet-name>
+      <url-pattern>/servlet/resource/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_7">
+      <servlet-name>BusinessObjectServlet</servlet-name>
+      <url-pattern>/servlet/object/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_8">
+      <servlet-name>MatrixExchangeServlet</servlet-name>
+      <url-pattern>/servlet/MatrixExchangeServlet/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_9">
+      <servlet-name>BusinessTypeServlet</servlet-name>
+      <url-pattern>/servlet/type/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_10">
+      <servlet-name>Framework</servlet-name>
+      <url-pattern>/servlet/framework/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_11">
+      <servlet-name>FileCheckoutServlet</servlet-name>
+      <url-pattern>/servlet/checkout/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_12">
+      <servlet-name>WizardServlet</servlet-name>
+      <url-pattern>/servlet/wizard/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_13">
+      <servlet-name>WorkspaceServlet</servlet-name>
+      <url-pattern>/workspace/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_14">
+      <servlet-name>fcs</servlet-name>
+      <url-pattern>/servlet/fcs/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="ServletMapping_15">
+      <servlet-name>audit</servlet-name>
+      <url-pattern>/servlet/audit/*</url-pattern>
+   </servlet-mapping>
+   <!--
+      <servlet-mapping id="ServletMapping_16">
+         <servlet-name>TimerServlet</servlet-name>
+         <url-pattern>/servlet/timer/*</url-pattern>
+      </servlet-mapping>
+-->
+   <servlet-mapping id="ServletMapping_17">
+      <servlet-name>OpenViewFcsServlet</servlet-name>
+      <url-pattern>/servlet/openview/*</url-pattern>
+   </servlet-mapping>
+   <!-- Start servlet mapping for IC -->
+   <!-- End servlet mapping for IC -->
+   <!-- Start MSOfficeIntegration servlet mapping for MxMSOfficeServer -->
+   <servlet-mapping id="MSOIServletMapping_1">
+      <servlet-name>MSOICommandsServlet</servlet-name>
+      <url-pattern>/servlet/MSOICommandsServlet/*</url-pattern>
+   </servlet-mapping>
+   <!-- End MSOfficeIntegration servlet mapping for MxMSOfficeServer -->
+   <!-- Start AdobeIllustratorIntegration servlet mapping for ENOVIA Collaboration for Adobe Illustrator Server -->
+   <!-- Start AdobeIllustratorIntegration servlet mapping for ENOVIA Collaboration for Adobe Illustrator Server -->
+   <!-- End AdobeIllustratorIntegration servlet mapping for ENOVIA Collaboration for Adobe Illustrator Server -->
+   <!-- Start servlet mapping for MCAD -->
+   <servlet-mapping id="MCADServletMapping_1">
+      <servlet-name>IEFCommandsServlet</servlet-name>
+      <url-pattern>/servlet/IEFCommandsServlet/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="MCADServletMapping_2">
+      <servlet-name>MCADBrowserServlet</servlet-name>
+      <url-pattern>/servlet/MCADBrowserServlet/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping id="MCADServletMapping_3">
+      <servlet-name>IEFRapidFileAccessServlet</servlet-name>
+      <url-pattern>/servlet/IEFRapidFileAccessServlet/*</url-pattern>
+   </servlet-mapping>
+   <!-- End servlet mapping for MCAD -->
+   <!-- Start servlet mapping for VPLM -->
+   <!-- End servlet mapping for VPLM -->
+   <!-- Start servlet mapping for .NET -->
+   <servlet-mapping id="NETServletMapping_1">
+      <servlet-name>BinaryDownload</servlet-name>
+      <url-pattern>/servlet/BinaryDownload/*</url-pattern>
+   </servlet-mapping>
+   <!-- End servlet mapping for .NET -->
+   <!-- APP -->
+   <!--
+	<servlet-mapping>
+         <servlet-name>ZymDispatchServlet</servlet-name>
+         <url-pattern>*.zym</url-pattern>
+      </servlet-mapping>
+-->
+   <!-- APP -->
+   <session-config id="SessionConfig_1">
+      <session-timeout>30</session-timeout>
+   </session-config>
+   <mime-mapping id="MimeMapping_1">
+      <extension>pdf</extension>
+      <mime-type>application/pdf</mime-type>
+   </mime-mapping>
+   <mime-mapping id="MimeMapping_2">
+      <extension>xls</extension>
+      <mime-type>application/vnd.ms-excel</mime-type>
+   </mime-mapping>
+   <mime-mapping id="MimeMapping_3">
+      <extension>exe</extension>
+      <mime-type>application/octet-stream</mime-type>
+   </mime-mapping>
+   <!-- ***Web Services*** -->
+   <mime-mapping>
+      <extension>wsdl</extension>
+      <mime-type>text/xml</mime-type>
+   </mime-mapping>
+   <mime-mapping>
+      <extension>xsd</extension>
+      <mime-type>text/xml</mime-type>
+   </mime-mapping>
+   <mime-mapping>
+      <extension>xsl</extension>
+      <mime-type>text/xml</mime-type>
+   </mime-mapping>
+   <!-- ***Web Services*** -->
+   <welcome-file-list>
+      <welcome-file>/common/emxNavigator.jsp</welcome-file>
+   </welcome-file-list>
+   <filter>
+      <filter-name>StaticContentCachingFilter</filter-name>
+      <filter-class>com.matrixone.servlet.StaticContentCachingFilter</filter-class>
+      <init-param>
+         <param-name>ematrix.cache-control.ResourceLifetime</param-name>
+         <param-value>7d</param-value>
+      </init-param>
+   </filter>
+   <filter-mapping>
+      <filter-name>StaticContentCachingFilter</filter-name>
+      <url-pattern>*.html</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>StaticContentCachingFilter</filter-name>
+      <url-pattern>*.js</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>StaticContentCachingFilter</filter-name>
+      <url-pattern>*.css</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>StaticContentCachingFilter</filter-name>
+      <url-pattern>*.xsl</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>StaticContentCachingFilter</filter-name>
+      <url-pattern>*.gif</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>StaticContentCachingFilter</filter-name>
+      <url-pattern>*.jpg</url-pattern>
+   </filter-mapping>
+   <filter id="M1WebServicesInfra_Filter1">
+      <filter-name>jsonfilter</filter-name>
+      <filter-class>com.matrixone.jsystem.ws.impl.json.JsonFilter</filter-class>
+   </filter>
+   <filter-mapping id="M1WebServicesInfra_FilterMapping1">
+      <filter-name>jsonfilter</filter-name>
+      <url-pattern>/webservice/json/*</url-pattern>
+   </filter-mapping>
+   <servlet id="VPLMServlet_2">
+      <servlet-name>webservice</servlet-name>
+      <servlet-class>com.matrixone.jsystem.ws.impl.SoapServlet</servlet-class>
+   </servlet>
+   <servlet-mapping id="VPLMServletMapping_3">
+      <servlet-name>webservice</servlet-name>
+      <url-pattern>/webservice/*</url-pattern>
+   </servlet-mapping>
+   <!--
+    <listener>
+        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class> 
+    </listener>
+    <servlet>
+        <servlet-name>jaxwsservlet</servlet-name> 
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class> 
+        <load-on-startup>1</load-on-startup> 
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jaxwsservlet</servlet-name> 
+        <url-pattern>/jxws/*</url-pattern> 
+    </servlet-mapping>
+    -->
+	
+	<!-- TVC servlet registration -->
+<servlet>
+<servlet-name>tvcservlet</servlet-name>
+<servlet-class>com.technia.tvc.core.TVCServlet</servlet-class>
+<init-param>
+<param-name>tvc.structurebrowser.submitParentOID</param-name>
+<param-value>false</param-value>
+</init-param>
+<init-param>
+<param-name>tvc.structurebrowser.export.nativeExcel</param-name>
+<param-value>TRUE</param-value>
+</init-param>
+<init-param>
+<param-name>tvc.structurebrowser.findlike.stylesheet.type_Part</param-name>
+<param-value>type_Part.xsl</param-value>
+</init-param>
+<init-param>
+<param-name>tvc.core.productionMode</param-name>
+<param-value>FALSE</param-value>
+</init-param>
+<init-param>
+	<param-name>tvc.core.licenseAudit.disabled</param-name>
+	<param-value>true</param-value>
+</init-param>
+ <init-param>
+   <param-name>tvc.core.table.paginationThreshold</param-name>
+   <param-value>100000</param-value>
+ </init-param>
+<init-param>
+    <param-name>tvc.core.plugins</param-name>
+    <param-value>com.technia.tvcaddon.Plugin,com.lexmark.tvc.LXKTVCLibraryCentralPlugin,com.lexmark.tvc.LXKAutoCompletePreCachePlugin,com.lexmark.tvc.plugins.LXKCollaboratorAjaxPlugin,com.lexmark.tvc.plugins.LXKEngineeringAjaxPlugin</param-value>
+</init-param>
+<init-param>
+            <param-name>tvc.core.autoComplete.excludedPersons</param-name>
+            <param-value>Administration User,Autoclau,Common Access Grantor,Corporate,creator,guest,mxideas,mxptmint,NotificationAgent,Project Space Access Grantor,Request Access Grantor,Route Delegation Grantor,Subscription Agent,Test Everything,TVC Shadow Agent,Unmanaged Document Grantor,User Agent,webmeth,WorkspaceAccess Grantor,Workspace Lead Grantor,Workspace Member Grantor</param-value>
+        </init-param>
+
+<load-on-startup>100</load-on-startup>
+</servlet>
+</web-app>

@@ -1,0 +1,6 @@
+Association Name	AEF Registry Name	Description	"Definition (use format ""[user] | and / or | [user]"" ...)"	Hidden (true / false)	Icon File Name
+LXKDesignAndSupplierEngineers	LXKDesignAndSupplierEngineers	This is an association between DE and SE in the system	Design Engineer | and | Supplier Engineer	false
+LXKCompany	LXKCompany	This association is for Users with access to material	group_Lexmark_Access	FALSE	
+Public Promote	Public Promote	Public Promote	!User Agent	FALSE	
+LXKMatrixUser	LXKMatrixUser	This is an association between Lexmark User and Non-Lexmark User in the system	!User Agent	false
+LXKECME	LXKECME	This is an association between Lexmark User and Non-Lexmark User in the system	!User Agent	false
