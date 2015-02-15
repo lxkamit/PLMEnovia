@@ -1,6 +1,6 @@
 <%@ page import="java.io.*,java.util.*" %>
 <%
-    String title = "Accessing Request Param";
+    String title ="Enovia PLM";
 %>
 <html>
 <head>
