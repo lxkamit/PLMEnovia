@@ -1,1 +1,1 @@
-1. fix is applied in R15.01 branch
+fix is applied in R15.01 branch in git repo for recent hotfix.
