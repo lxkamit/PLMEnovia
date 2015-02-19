@@ -1,1 +1,1 @@
-1. fix is applied in R15.01 branch
+1. fix is in the trunk
