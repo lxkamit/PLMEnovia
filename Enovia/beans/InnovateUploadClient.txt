@@ -1,0 +1,234 @@
+
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+import com.matrixone.apps.domain.util.FrameworkUtil;
+
+public class InnovateUploadClient {
+    public static void main(String[] args) {
+        // file name with path to upload file in innovate
+        String strReportFilePath = "D:/temp/Noncompliant Product Configurations.xls";
+
+        try {
+            // delete previous versions of files in Innovate
+            deletePreviousAttachmentsForNonCompFromInnovate();
+
+            // upload latest generated file.
+            uploadNoncompliantProdConExtractToInnovate(strReportFilePath);
+            System.out.println("completed...");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+    
+    /*
+     * deletePreviousAttachmentsForNonCompFromInnovate()
+     */
+    public static void deletePreviousAttachmentsForNonCompFromInnovate() throws Exception {
+        boolean contextPushed = false;
+        try {
+
+            String strDescription = "";
+            Vector slInnovateDetails = null;
+
+            int slSize = 0;
+            final String strEndpoint = "/attachments/contents/";
+            final String strEndpointToDelete = "/attachments/";
+
+            String strInnovateDocumentID = "";
+            String strInnovateURL = "";
+            String strInnovateUserName = "";
+            String strInnovatePassword = "";
+
+            // get internal document id
+            strInnovateDocumentID = "304854";
+            if (strInnovateDocumentID != null && !strInnovateDocumentID.isEmpty()) {
+
+                strDescription = "https://lexmark.jiveon.com/api/core/v3|plmtest|test";
+
+                if (strDescription != null && !strDescription.isEmpty()) {
+                    if (strDescription.indexOf("|") != -1) {
+                        slInnovateDetails = FrameworkUtil.split(strDescription, "|");
+                    }
+                    if (slInnovateDetails != null && !slInnovateDetails.isEmpty()) {
+
+                        slSize = slInnovateDetails.size();
+                        if (slSize == 3) {
+
+                            strInnovateURL = (java.lang.String) slInnovateDetails.get(0);
+                            strInnovateUserName = (java.lang.String) slInnovateDetails.get(1);
+                            strInnovatePassword = (java.lang.String) slInnovateDetails.get(2);
+
+                            String strUserPass = strInnovateUserName + ":" + strInnovatePassword;
+                            String strFinalInnovateURL = strInnovateURL + strEndpoint + strInnovateDocumentID;
+
+                            URL objURL = new URL(strFinalInnovateURL);
+                            HttpURLConnection connInnovate = (HttpURLConnection) objURL.openConnection();
+
+                            connInnovate.setRequestMethod("GET");
+
+                            String strBasicAuth = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(strUserPass.getBytes("UTF-8"));
+                            connInnovate.setRequestProperty("Authorization", strBasicAuth);
+
+                            StringBuffer sbResponse = new StringBuffer();
+                            String strAttachmentId = "";
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(connInnovate.getInputStream()));
+                            String line = null;
+                            while ((line = reader.readLine()) != null) {
+
+                                sbResponse.append(line);
+                            }
+                            reader.close();
+                            connInnovate.disconnect();
+
+                            String strResponse = sbResponse.toString();
+                            int iIndexId = strResponse.indexOf("id");
+                            if (iIndexId >= 0) {
+                                strResponse = strResponse.substring(iIndexId + 6, strResponse.length());
+                                strResponse = strResponse.substring(1, strResponse.indexOf("\","));
+                                strAttachmentId = strResponse;
+
+                                strInnovateURL = strInnovateURL + strEndpointToDelete + strAttachmentId;
+
+                                objURL = new URL(strInnovateURL);
+                                connInnovate = (HttpURLConnection) objURL.openConnection();
+                                connInnovate.setRequestMethod("DELETE");
+                                strBasicAuth = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(strUserPass.getBytes("UTF-8"));
+                                connInnovate.setRequestProperty("Authorization", strBasicAuth);
+                                BufferedReader reader2 = new BufferedReader(new InputStreamReader(connInnovate.getInputStream()));
+
+                                reader2.close();
+                                connInnovate.disconnect();
+
+                            }
+
+                        }
+                    }
+
+                }
+
+            } else {
+                throw new Exception("Admin object [LXKADMIN InnovateNoncompliantProdCons - ]: not set properly. Please conatct PLM Admin");
+            }
+
+        } catch (Exception e) {
+            System.out.println("\n Exception in method deleteAttachmentFromInnovate: " + e);
+            e.printStackTrace();
+        }
+
+    }
+    
+    
+    /*
+     * uploadNoncompliantProdConExtractToInnovate()
+     */
+    public static void uploadNoncompliantProdConExtractToInnovate(String strReportFilePath) throws Exception {
+
+        boolean contextPushed = false;
+        try {
+
+            String strDescription = "";
+            int slSize = 0;
+            final String strEndpoint = "/attachments/contents/";
+
+            String strInnovateDocumentID = "";
+            String strInnovateURL = "";
+            String strInnovateUserName = "";
+            String strInnovatePassword = "";
+            Vector slInnovateDetails = null;
+
+            // internal document id for Innovate DOC ID
+            // :https://innovate.lexmark.com/docs/DOC-194876
+            strInnovateDocumentID = "304854";
+
+            if (strInnovateDocumentID != null && !strInnovateDocumentID.isEmpty()) {
+
+                // Innovate details
+                strDescription = "https://lexmark.jiveon.com/api/core/v3|plmtest|test";
+
+                if (strDescription != null && !strDescription.isEmpty()) {
+                    if (strDescription.indexOf("|") != -1) {
+                        slInnovateDetails = FrameworkUtil.split(strDescription, "|");
+                    }
+                    if (slInnovateDetails != null && !slInnovateDetails.isEmpty()) {
+                        System.out.println("slInnovateDetails: " + slInnovateDetails);
+
+                        strInnovateURL = (java.lang.String) slInnovateDetails.get(0);//https://lexmark.jiveon.com/api/core/v3
+                        strInnovateUserName = (java.lang.String) slInnovateDetails.get(1);//plmtest
+                        strInnovatePassword = (java.lang.String) slInnovateDetails.get(2);//test
+
+                        String strUserPass = strInnovateUserName + ":" + strInnovatePassword;
+                        String strFinalInnovateURL = strInnovateURL + strEndpoint + strInnovateDocumentID;
+                        URL objURL = new URL(strFinalInnovateURL);
+                        HttpURLConnection connInnovate = (HttpURLConnection) objURL.openConnection();
+
+                        connInnovate.setRequestProperty("Content-Type", "multipart/form-data; boundary=SNIP");
+                        connInnovate.setDoOutput(true);
+                        connInnovate.setRequestMethod("POST");
+
+                        String strBasicAuth = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(strUserPass.getBytes("UTF-8"));
+                        connInnovate.setRequestProperty("Authorization", strBasicAuth);
+
+                        final String data1 = "--SNIP\r\nContent-Disposition:  form-data; filename=\"Noncompliant Product Configurations.xls\";"
+                                + "name=\"foo\"\r\nContent-Type:application/json\r\n\r\n{\"type\":\"file\"" 
+                        + "}\r\n--SNIP\r\nContent-Disposition: form-data;"
+                                + "filename=\"Noncompliant Product Configurations.xls\";name=\"foo\"\r\nContent-Type: application/vnd.ms-excel\r\n\r\n";
+
+                        final String data2 = "\r\n--SNIP--\r\n";
+
+                        OutputStream outputStream2 = connInnovate.getOutputStream();
+
+                        PrintWriter writer2 = new PrintWriter(new OutputStreamWriter(outputStream2, "UTF-8"), true);
+
+                        writer2.append(data1);
+                        writer2.flush();
+
+                        FileInputStream inputStream = new FileInputStream(strReportFilePath);
+                        byte[] buffer = new byte[4096];
+                        int bytesRead = -1;
+                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                            outputStream2.write(buffer, 0, bytesRead);
+                        }
+                        outputStream2.flush();
+                        inputStream.close();
+
+                        writer2.append(data2).flush();
+                        writer2.close();
+                        System.out.println("cURL command : "+ data1);
+                        System.out.println("cURL command : "+ data2);
+                        List<String> response = new ArrayList<String>();
+
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(connInnovate.getInputStream()));
+                        String line = null;
+                        while ((line = reader.readLine()) != null) {
+                            response.add(line);
+                        }
+                        System.out.println("response: "+response);
+                        reader.close();
+                        connInnovate.disconnect();
+
+                    }
+
+                }
+
+            } else {
+                throw new Exception(" Please conatct PLM Admin");
+            }
+        } catch (Exception e) {
+            System.out.println("\n Exception in method uploadNoncompliantProdConExtractToInnovate: " + e);
+            e.printStackTrace();
+        }
+    }
+}
